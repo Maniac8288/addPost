@@ -20,7 +20,7 @@ namespace AddPost.Models
             "Новости",
             "Истории",
             "Политика",
-             "Другое"
+             "Кино"
         };
         public string selectedCategory { get; set; }
         /// <summary>

@@ -4,43 +4,63 @@
 }
 
 <h3 align="center">Посты</h3>
-<div class="row">
-   
-    <div class="col-xs-6 col-md-3" >
-       
-    </div>
+<div class="container">
 
-    <div class="col-xs-12 col-sm-6 col-md-9">
 
-        @foreach (var item in Model)
-        {
-            <div class="col-xs-6 col-sm-4.5" id="productContainer">
+      
 
-                <h2>
-                    @Html.DisplayFor(modelItem => item.NamePost)
-                </h2>
-                <p>
-                    @Html.DisplayFor(modelItem => item.selectedCategory)
-                 
-                </p>
-               
-                 <img src="~/img/@item.upload" alt="хех" class="img-thumbnail">
-         
-             
-                <p>
-                    @Html.DisplayFor(modelItem => item.contentPost)
-                </p>
-                <p>
+        <div class="col-md-12">
 
-                    @Html.DisplayFor(modelItem => item.dateAddPost)
-                </p>
-                <p>
-                    @Html.DisplayFor(modelItem => item.Tags)
-                </p>
-               
-              
-            </div>
-        }
-    </div>
+            @foreach (var item in Model)
+            {
+                <div class="col-md-12 panel panel-info">
+                    <div class="panel-heading">
+                        <h1 class="panel-title" align="center">
+                            @Html.DisplayFor(modelItem => item.NamePost)
+                        </h1>
+                    </div>
+                
+                    <div class="panel-heading">
+                        <h3 class="panel-title" align="center">
+                            
+                            Категория: @Html.DisplayFor(modelItem => item.selectedCategory)
+                        </h3>
+                        </div>
+                    <br />
+                        <div align="center">
+                            <img src="~/img/@item.upload" alt="хех" class="img-thumbnail">
+                        </div>
+                    <br />
+                   <div class="contentPost">
+                       <a href="#">
+                           <div class="panel-body">
+                               <p>
 
+                                   @Html.DisplayFor(modelItem => item.contentPost)
+
+                               </p>
+
+                           </div>
+                       </a>
+                    </div>
+                    <p class="panel-body" align="center">
+                        <a href="#"> Читать  далее</a>
+                    </p>
+                       
+                        <div class="panel-footer" align="center">
+                            <p>
+                                @Html.DisplayFor(modelItem => item.dateAddPost)
+                            </p>
+                            <div class="help-block">
+                                <p>
+                                    @Html.DisplayFor(modelItem => item.Tags)
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+            }
+        </div>
+
+    
 </div>

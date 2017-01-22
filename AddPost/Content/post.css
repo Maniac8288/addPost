@@ -1,0 +1,19 @@
+﻿.contentPost {
+    display:block;
+box-shadow: 0 0 5px rgba(0,0,0,0.75), inset 0 0 2px  #33ADFF;
+    max-height: 180px;
+    overflow-y: hidden;
+    font-size: 14px;
+}
+.contentPost:hover {
+    display:block;
+box-shadow: 0 0 10px rgba(0,0,0,0.75), inset 0 0 3px  #33ADFF;
+    max-height: 180px;
+    overflow-y: hidden;
+  
+}
+div.contentPost  >  a{color: black; text-decoration: none; }
+
+div.panel-title > h1 {font-size:20px}
+
+div.panel-title > h3 {font-size:18px}
