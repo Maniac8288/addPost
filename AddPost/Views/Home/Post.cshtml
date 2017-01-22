@@ -1,66 +1,64 @@
-﻿@model IEnumerable<AddPost.Models.Post>
+﻿@model AddPost.Models.Post
 @{
-    ViewBag.Title = "Главная";
+    ViewBag.Title = "Post";
 }
 
-<h3 align="center">Посты</h3>
+
 <div class="container">
-
-
-      
 
         <div class="col-md-12">
 
-            @foreach (var item in Model)
-            {
+         
+ 
                 <div class="col-md-12 panel panel-info">
                     <div class="panel-heading">
                         <h1 class="panel-title" align="center">
-                            @item.NamePost
+                            @Model.NamePost
                         </h1>
                     </div>
                 
                     <div class="panel-heading">
                         <h3 class="panel-title" align="center">
                             
-                            Категория: @item.selectedCategory
+                            Категория: @Model.selectedCategory
                         </h3>
                         </div>
                     <br />
                         <div align="center">
-                            <img src="~/img/@item.upload" alt="@item.NamePost" title="@item.NamePost" width="65%" class="img-thumbnail">
+                            <img src="~/img/@Model.upload" alt="@Model.NamePost" title="@Model.NamePost" width="85% class="img-thumbnail">
                         </div>
                     <br />
-                   <div class="contentPost">
+                   <div class="contentPostReady">
                       
                            <div class="panel-body">
                                <p>
 
-                                   @item.contentPost
+                                   @Model.contentPost
 
                                </p>
 
                            </div>
                       
                     </div>
-                    <p class="panel-body" align="center">
-                        <a href="home/post/@item.PostID"  title="Полная сататья"> Читать  далее</a>
-                    </p>
+                   
                     <div class="postFoter">
                         <div class="panel-footer" align="center">
                             <p>
-                                @item.dateAddPost
+                                @Model.dateAddPost
                             </p>
                             <div class="help-block">
                                 <p>
-                                    @item.Tags
+                                    @Model.Tags
                                 </p>
                             </div>
-                        </div>
+
                         </div>
                     </div>
-            }
+                    </div>
+            
         </div>
 
     
 </div>
+
+

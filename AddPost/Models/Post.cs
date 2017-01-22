@@ -35,8 +35,11 @@ namespace AddPost.Models
         /// Дата создания
         /// </summary>
         public string dateAddPost { get; set; }
+        /// <summary>
+        /// Название картинки
+        /// </summary>
         public string upload { get; set; }
-        
+        public int PostID { get; set; }
     }
    
 }
