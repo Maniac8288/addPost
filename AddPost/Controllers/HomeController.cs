@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AddPost.Models;
 
 namespace AddPost.Controllers
 {
@@ -10,21 +11,27 @@ namespace AddPost.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return View( PostDataStorage.Instance.GetAllPost());
         }
-
-        public ActionResult About()
+        [HttpGet]
+        public ActionResult AddPost()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+         
+            return View(new Post());
         }
-
-        public ActionResult Contact()
+        [HttpPost]
+        public ActionResult AddPost(Post model, HttpPostedFileBase upload)
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            if (upload != null)
+            {
+                // получаем имя файла
+                string fileName = System.IO.Path.GetFileName(upload.FileName);
+                model.upload = fileName;
+                // сохраняем файл в папку Files в проекте
+                upload.SaveAs(Server.MapPath("~/img/" + fileName));
+            }
+            PostDataStorage.Instance.AddPost(model);
+                return View();
         }
     }
 }
