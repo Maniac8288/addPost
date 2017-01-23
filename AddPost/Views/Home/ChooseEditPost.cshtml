@@ -24,11 +24,14 @@
                     <a href="/home/EditPost/@item.PostID">
                         <button type="button" class="btn btn-warning">Редактировать</button>
                     </a>
-                    <a href="#">
-                        <button type="button" class="btn btn-danger">Удалить</button>
-                    </a>
+                    <form method="post">
+                        @Html.ActionLink("Удалить", "ChooseEditPost", new { id = item.PostID }, new { @class = "btn btn-danger" })
+                   
+                        <input type="submit" name="deletePost" value="Удалить @item.PostID" />
+                    </form>
                 </div>
             </div>
         </div>
     }
 </div>
+

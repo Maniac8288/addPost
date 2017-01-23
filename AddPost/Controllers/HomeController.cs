@@ -15,7 +15,7 @@ namespace AddPost.Controllers
         /// <returns>Вывод всех постов отсортированне по дате </returns>
         public ActionResult Index()
         {
-            return View( PostDataStorage.Storage.GetAllPost().OrderByDescending(x =>x.dateAddPost));
+            return View(PostDataStorage.Storage.GetAllPost().OrderByDescending(x => x.dateAddPost));
         }
         /// <summary>
         /// Страница добовления поста на сайт
@@ -24,7 +24,7 @@ namespace AddPost.Controllers
         [HttpGet]
         public ActionResult AddPost()
         {
-         
+
             return View();
         }
         /// <summary>
@@ -40,12 +40,12 @@ namespace AddPost.Controllers
             {
                 // получаем имя файла
                 string fileName = System.IO.Path.GetFileName(upload.FileName);
-                model.upload=fileName;
+                model.upload = fileName;
                 // сохраняем файл в папку img в проекте
                 upload.SaveAs(Server.MapPath("~/img/" + fileName));
             }
             PostDataStorage.Storage.AddPost(model);
-                return View();
+            return View();
         }
         /// <summary>
         /// Страница с определенным постом
@@ -60,22 +60,47 @@ namespace AddPost.Controllers
         /// Страница с выбором постов, которые нужно изменить
         /// </summary>
         /// <returns>Вывод всех постов</returns>
+        [HttpGet]
         public ActionResult ChooseEditPost()
         {
             return View(PostDataStorage.Storage.GetAllPost());
         }
+        [HttpPost]
+        public ActionResult ChooseEditPost(Post model)
+        {
+            PostDataStorage.Storage.DeletePost(model.PostID);
+            return RedirectToAction("Index", model);
+        }   
         [HttpGet]
         public ActionResult EditPost(int id)
         {
-          
+
             return View(PostDataStorage.Storage.GetPostById(id));
         }
         [HttpPost]
-        public ActionResult EditPost(int id,Post model)
+        public ActionResult EditPost(int id, Post model, HttpPostedFileBase upload)
         {
+            if (upload != null)
+            {
+                // получаем имя файла
+                string fileName = System.IO.Path.GetFileName(upload.FileName);
+                model.upload = fileName;
+                // сохраняем файл в папку img в проекте
+                upload.SaveAs(Server.MapPath("~/img/" + fileName));
+            }
             PostDataStorage.Storage.EditPost(model);
-            return View("Post",model);
+            return View("Post", model);
         }
-      
+        [HttpGet]
+        public ActionResult deletePost(int id)
+        {
+            return View(PostDataStorage.Storage.GetPostById(id));
+        }
+        [HttpPost]
+        public ActionResult  deletePost (int id, Post model)
+        {
+            PostDataStorage.Storage.DeletePost(id);
+            return RedirectToAction("Index");
+        }
     }
 }

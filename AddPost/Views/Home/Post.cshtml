@@ -19,8 +19,9 @@
                         </h3>
                         </div>
                     <br />
-                        <div align="center">
-                            <img src="~/img/@Model.upload" alt="@Model.NamePost" title="@Model.NamePost" width="85% class="img-thumbnail">
+                        <div align="center">@if (Model.upload != null)
+                        {
+                            <img src="~/img/@Model.upload" alt="@Model.NamePost" title="@Model.NamePost" width="65%" class="img-thumbnail">}
                         </div>
                     <br />
                    <div class="contentPostReady">

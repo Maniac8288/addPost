@@ -70,9 +70,19 @@ namespace AddPost.Models
             {
                 return;
             }
+            
             postList.Remove(oldModel);
-            Storage.postList.Add(model);
+            postList.Add(model);
 
+        }
+        public void DeletePost(int PostID)
+        {
+            var model = postList.Find(x => x.PostID == PostID);
+            if (model == null)
+            {
+                return;
+            }
+            postList.Remove(model);
         }
     }
 }
