@@ -12,10 +12,10 @@ namespace AddPost.Controllers
         /// <summary>
         /// Главная страница
         /// </summary>
-        /// <returns>Вывод всех постов</returns>
+        /// <returns>Вывод всех постов отсортированне по дате </returns>
         public ActionResult Index()
         {
-            return View( PostDataStorage.Storage.GetAllPost());
+            return View( PostDataStorage.Storage.GetAllPost().OrderByDescending(x =>x.dateAddPost));
         }
         /// <summary>
         /// Страница добовления поста на сайт
@@ -64,9 +64,18 @@ namespace AddPost.Controllers
         {
             return View(PostDataStorage.Storage.GetAllPost());
         }
-        public ActionResult EditPost()
+        [HttpGet]
+        public ActionResult EditPost(int id)
         {
-            return View();
+          
+            return View(PostDataStorage.Storage.GetPostById(id));
         }
+        [HttpPost]
+        public ActionResult EditPost(int id,Post model)
+        {
+            PostDataStorage.Storage.EditPost(model);
+            return View("Post",model);
+        }
+      
     }
 }
