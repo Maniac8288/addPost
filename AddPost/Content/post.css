@@ -26,3 +26,9 @@ box-shadow: 0 0 2px rgba(0,0,0,0.45), inset 0 0 1px  #33ADFF;
      font-family:'Times New Roman', Times, serif;
      font-size: 16px;
 }
+.blockPost {
+    display: inline-block;
+    margin: 10px;
+    width:250px;
+    height:350px;
+}

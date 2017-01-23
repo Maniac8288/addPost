@@ -24,10 +24,12 @@ namespace AddPost
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                "~/Content/post.css",
+              
                 "~/Content/site.css",
-                      "~/Content/bootstrap.css"
-                        
+                      "~/Content/bootstrap.css",
+                      "~/Content/post.css"
+
+
                       ));
         }
     }

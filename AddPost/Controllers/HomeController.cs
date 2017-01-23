@@ -25,7 +25,7 @@ namespace AddPost.Controllers
         public ActionResult AddPost()
         {
          
-            return View(new Post());
+            return View();
         }
         /// <summary>
         /// Добовление поста в коллекцию
@@ -47,9 +47,26 @@ namespace AddPost.Controllers
             PostDataStorage.Storage.AddPost(model);
                 return View();
         }
+        /// <summary>
+        /// Страница с определенным постом
+        /// </summary>
+        /// <param name="id">ид определенного поста</param>
+        /// <returns>Вызывает метод определяющий ИД</returns>
         public ActionResult Post(int id)
         {
             return View(PostDataStorage.Storage.GetPostById(id));
+        }
+        /// <summary>
+        /// Страница с выбором постов, которые нужно изменить
+        /// </summary>
+        /// <returns>Вывод всех постов</returns>
+        public ActionResult ChooseEditPost()
+        {
+            return View(PostDataStorage.Storage.GetAllPost());
+        }
+        public ActionResult EditPost()
+        {
+            return View();
         }
     }
 }
