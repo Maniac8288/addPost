@@ -31,6 +31,8 @@ namespace AddPost.Models
         /// Тэги
         /// </summary>
         public string Tags { get; set; }
+ 
+        public List<string> CollectionTags = new List<string>();
         /// <summary>
         /// Дата создания
         /// </summary>

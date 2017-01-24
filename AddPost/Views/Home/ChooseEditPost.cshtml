@@ -24,11 +24,7 @@
                     <a href="/home/EditPost/@item.PostID">
                         <button type="button" class="btn btn-warning">Редактировать</button>
                     </a>
-                    <form method="post">
-                        @Html.ActionLink("Удалить", "ChooseEditPost", new { id = item.PostID }, new { @class = "btn btn-danger" })
-                   
-                        <input type="submit" name="deletePost" value="Удалить @item.PostID" />
-                    </form>
+                    <a href="@Url.Action("deletePost","Home",new { id = item.PostID } )" class="btn btn-danger" id="deletePost" onclick="JavaScript:return confirm('Вы действительно хотите удалить пост?')">Удалить</a>
                 </div>
             </div>
         </div>

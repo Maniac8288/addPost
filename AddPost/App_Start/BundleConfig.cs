@@ -27,7 +27,8 @@ namespace AddPost
               
                 "~/Content/site.css",
                       "~/Content/bootstrap.css",
-                      "~/Content/post.css"
+                      "~/Content/post.css",
+                          "~/Content/PagedList.css"
 
 
                       ));

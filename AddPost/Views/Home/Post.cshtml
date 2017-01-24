@@ -44,7 +44,12 @@
                             </p>
                             <div class="help-block">
                                 <p>
-                                    @Model.Tags
+                                   @foreach (var tags in Model.CollectionTags)
+                                   {
+                                    <a class="btn btn-default btn-sm" href="#">
+                                        @tags
+                                    </a>
+                                   }
                                 </p>
                             </div>
 

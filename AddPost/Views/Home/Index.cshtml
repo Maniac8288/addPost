@@ -49,9 +49,14 @@
                                 @item.dateAddPost
                             </p>
                             <div class="help-block">
-                                <p>
-                                    @item.Tags
-                                </p>
+                               
+                                   @foreach (string tag in item.CollectionTags)
+                                   {
+                                    <a class="btn btn-default btn-sm" href="@Url.Action("Tag","Home", new { tags = tag })">
+                                        @tag
+                                    </a>
+                                   }
+
                             </div>
                         </div>
                         </div>
@@ -59,5 +64,5 @@
             }
    
 
-    
+   
 </div>
