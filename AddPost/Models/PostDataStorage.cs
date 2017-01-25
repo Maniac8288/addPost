@@ -77,9 +77,12 @@ namespace AddPost.Models
         {
             return postList.Find(x => x.PostID == PostID);
         }
-      
+        /// <summary>
+        /// Обновление информации о посте
+        /// </summary>
+        /// <param name="model"></param>
         public void EditPost(Post model)
-        {
+        {  ///Замена старой модели на новую
             var oldModel = postList.Find(x => x.PostID == model.PostID);
             if (oldModel == null)
             {
@@ -104,9 +107,14 @@ namespace AddPost.Models
             }
             postList.Remove(model);
         }
-        public Post GetPostByTag(string Tag)
+        /// <summary>
+        /// Метод поиска постов по заданному тегу
+        /// </summary>
+        /// <param name="Tag">Имя тега</param>
+        /// <returns>Список постов</returns>
+        public List<Post> GetPostByTag(string Tag)
         {
-            return postList.Find(x => x.CollectionTags.Contains(Tag));
+            return postList.FindAll(x => x.CollectionTags.Contains(Tag));
         }
     }
    
