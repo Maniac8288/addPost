@@ -25,7 +25,35 @@
                     }
                 </select>
 
+
+
+                <div class="btn-group pull-right">
+                    <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle ">Выберите категорию <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        @foreach (var item in Post.News)
+                        {
+                           <li><a href="#">@item</a></li>
+                        }
+
+                    </ul>
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                        Выпадающий список
+                    </button>
+                    <ul class="dropdown-menu">
+                        @foreach (string element in Post.Category)
+                        {
+                            <li class="dropdown-header">@element</li> foreach (var item in Post.News)
+                            {
+                        <li><a href="#">@item</a></li>}
+                        }
+                       
+                    </ul>
+                </div>
+
             </div>
+
         </div>
 
         <div class="form-group">

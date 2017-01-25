@@ -5,6 +5,9 @@ using System.Web;
 
 namespace AddPost.Models
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Post
     {/// <summary>
     /// Название поста
@@ -13,14 +16,17 @@ namespace AddPost.Models
         /// <summary>
         /// Коллекция постов
         /// </summary>
-        public static List<string> Category = new List<string>()
+        public static List<Category> Category = new List<Category>()
         {
             "Медицина",
-            "Спорт",
             "Новости",
             "Истории",
+        };
+        public static List<string> News = new List<string>()
+        {
+            "Спорт",
             "Политика",
-             "Кино"
+            "Кино"
         };
         public string selectedCategory { get; set; }
         /// <summary>

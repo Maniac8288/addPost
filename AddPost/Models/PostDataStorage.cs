@@ -105,6 +105,9 @@ namespace AddPost.Models
             {
                 return;
             }
+            
+                System.IO.File.Delete("~/img/"+model.upload);
+          
             postList.Remove(model);
         }
         /// <summary>
@@ -115,6 +118,10 @@ namespace AddPost.Models
         public List<Post> GetPostByTag(string Tag)
         {
             return postList.FindAll(x => x.CollectionTags.Contains(Tag));
+        }
+       public List<Post> GetPostByCategory (string category)
+        {
+            return postList.FindAll(x => x.selectedCategory.Contains(category));
         }
     }
    

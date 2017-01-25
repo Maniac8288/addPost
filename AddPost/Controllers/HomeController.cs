@@ -68,13 +68,19 @@ namespace AddPost.Controllers
             return View(PostDataStorage.Storage.GetAllPost().OrderByDescending(x => x.dateAddPost));
         }
         /// <summary>
-        /// Метод удаляюзий
+        /// Метод удаление
         /// </summary>
         /// <param name="id"></param>
         /// <param name="model"></param>
         /// <returns>Возвращает на главную страницу</returns>
         public ActionResult deletePost(int id, Post model)
         {
+          
+            string fullPath = Request.MapPath("~/img/"+model.upload);
+            if (System.IO.File.Exists(fullPath))
+            {
+                System.IO.File.Delete(fullPath);
+            }
             PostDataStorage.Storage.DeletePost(id);
             return RedirectToAction("ChooseEditPost");
         }
@@ -96,9 +102,10 @@ namespace AddPost.Controllers
         /// <param name="model"></param>
         /// <param name="upload"></param>
         /// <returns>Возвращает на страницу пост</returns>
+       ///[ValidateInput(false)]
         [HttpPost]
         public ActionResult EditPost(int id, Post model, HttpPostedFileBase upload)
-        {
+       {
             if (upload != null)
             {
                 // получаем имя файла
@@ -115,6 +122,10 @@ namespace AddPost.Controllers
         {
          
             return View(PostDataStorage.Storage.GetPostByTag(tags));
+        }
+        public ActionResult Category(string category)
+        {
+            return View(PostDataStorage.Storage.GetPostByCategory(category));
         }
     }
 }

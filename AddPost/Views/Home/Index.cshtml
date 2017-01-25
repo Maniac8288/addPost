@@ -6,7 +6,19 @@
 
 
 <div class="container">
+    <br />
 
+    <div class="btn-group pull-right">
+        <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle ">Выберите категорию <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+            @foreach (var item in Post.Category)
+            {
+                <li><a href="@Url.Action("Category","Home", new { category = item })">@item</a></li>
+            }
+            
+        </ul>
+    </div>
+    <br /><br />
             @foreach (var item in Model)
             {
                 <div class="col-md-12 panel panel-info">
@@ -15,33 +27,34 @@
                             @item.NamePost
                         </h1>
                     </div>
-                
+
                     <div class="panel-heading">
                         <h3 class="panel-title" align="center">
-                            
-                              Категория: @item.selectedCategory
+
+                            Категория: @item.selectedCategory
                         </h3>
-                        </div>
-                   
-                        <div align="center">
-                            @if(item.upload!=null){
+                    </div>
+
+                    <div align="center">
+                        @if (item.upload != null)
+                        {
                             <img src="~/img/@item.upload" alt="@item.NamePost" title="@item.NamePost" width="65%" class="img-thumbnail">}
-                        </div>
+                    </div>
                     <br />
-                   <div class="contentPost">
-                      
-                           <div class="panel-body">
-                               <p>
+                    <div class="contentPost">
 
-                                   @item.contentPost
+                        <div class="panel-body">
+                            <p>
 
-                               </p>
+                                @item.contentPost
 
-                           </div>
-                      
+                            </p>
+
+                        </div>
+
                     </div>
                     <p class="panel-body" align="center">
-                        <a href="home/post/@item.PostID"  title="Полная сататья"> Читать  далее</a>
+                        <a href="home/post/@item.PostID" title="Полная сататья"> Читать  далее</a>
                     </p>
                     <div class="postFoter">
                         <div class="panel-footer" align="center">
@@ -49,20 +62,20 @@
                                 @item.dateAddPost
                             </p>
                             <div class="help-block">
-                               
-                                   @foreach (string tag in item.CollectionTags)
-                                   {
+
+                                @foreach (string tag in item.CollectionTags)
+                                {
                                     <a class="btn btn-default btn-sm" href="@Url.Action("Tag","Home", new { tags = tag })">
                                         @tag
                                     </a>
-                                   }
+                                }
 
                             </div>
                         </div>
-                        </div>
                     </div>
+                </div>
             }
-   
 
-   
-</div>
+
+
+        </div>
