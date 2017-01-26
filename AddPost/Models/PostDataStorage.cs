@@ -100,13 +100,14 @@ namespace AddPost.Models
         /// <param name="PostID"></param>
         public void DeletePost(int PostID)
         {
+            
             var model = postList.Find(x => x.PostID == PostID);
             if (model == null)
             {
                 return;
             }
             
-                System.IO.File.Delete("~/img/"+model.upload);
+            
           
             postList.Remove(model);
         }

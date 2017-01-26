@@ -18,39 +18,16 @@
         <div class="form-group">
             <label for="Category" class="col-sm-2 control-label">Категория</label>
             <div class="col-md-10">
-                <select class="form-control" required name="selectedCategory">
-                    @foreach(string element in Post.Category)
+               <!-- <select class="form-control" required name="selectedCategory">
+                     foreach(string element in Post.Category)
                     {
-                        <option>@element</option>
+                        <option>element</option>
                     }
                 </select>
+                   -->
 
 
-
-                <div class="btn-group pull-right">
-                    <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle ">Выберите категорию <span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                        @foreach (var item in Post.News)
-                        {
-                           <li><a href="#">@item</a></li>
-                        }
-
-                    </ul>
-                </div>
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                        Выпадающий список
-                    </button>
-                    <ul class="dropdown-menu">
-                        @foreach (string element in Post.Category)
-                        {
-                            <li class="dropdown-header">@element</li> foreach (var item in Post.News)
-                            {
-                        <li><a href="#">@item</a></li>}
-                        }
-                       
-                    </ul>
-                </div>
+           
 
             </div>
 

@@ -38,15 +38,19 @@ namespace AddPost.Controllers
         [HttpPost]
         public ActionResult AddPost(Post model, HttpPostedFileBase upload)
         {
+            PostDataStorage.Storage.AddPost(model);
             if (upload != null)
             {
+             
                 // получаем имя файла
                 string fileName = System.IO.Path.GetFileName(upload.FileName);
                 model.upload = fileName;
                 // сохраняем файл в папку img в проекте
-                upload.SaveAs(Server.MapPath("~/img/" + fileName));
+                System.IO.Directory.CreateDirectory(Server.MapPath("~/img/")+model.PostID);
+
+                upload.SaveAs(Server.MapPath("~/img/" + model.PostID + "/" + fileName));
             }
-            PostDataStorage.Storage.AddPost(model);
+           
             return RedirectToAction("Index");
         }
         /// <summary>
@@ -75,11 +79,12 @@ namespace AddPost.Controllers
         /// <returns>Возвращает на главную страницу</returns>
         public ActionResult deletePost(int id, Post model)
         {
-          
-            string fullPath = Request.MapPath("~/img/"+model.upload);
-            if (System.IO.File.Exists(fullPath))
+           
+
+            string fullPath = Request.MapPath("~/img/"+id);
+            if (System.IO.Directory.Exists(fullPath))
             {
-                System.IO.File.Delete(fullPath);
+                System.IO.Directory.Delete(fullPath,true);
             }
             PostDataStorage.Storage.DeletePost(id);
             return RedirectToAction("ChooseEditPost");

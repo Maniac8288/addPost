@@ -18,16 +18,9 @@ namespace AddPost.Models
         /// </summary>
         public static List<Category> Category = new List<Category>()
         {
-            "Медицина",
-            "Новости",
-            "Истории",
+          
         };
-        public static List<string> News = new List<string>()
-        {
-            "Спорт",
-            "Политика",
-            "Кино"
-        };
+  
         public string selectedCategory { get; set; }
         /// <summary>
         /// Содержимое поста
