@@ -18,7 +18,12 @@ namespace AddPost.Models
         /// </summary>
         public static List<Category> Category = new List<Category>()
         {
-          
+            new Category()
+            {
+                Name="Новости",
+                Childrens= new List<Category> {new Category() {Name="Спорт" } }
+            }
+
         };
   
         public string selectedCategory { get; set; }

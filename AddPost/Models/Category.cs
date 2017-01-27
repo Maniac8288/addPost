@@ -6,7 +6,7 @@ using System.Web;
 namespace AddPost.Models
 {
     public class Category
-    {
+    {   public int Id { get; set; }
         public string Name { get; set; }
         public List<Category> Childrens { get; set; }
         public Category Parent { get; set; }
