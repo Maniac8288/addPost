@@ -18,17 +18,16 @@
         <div class="form-group">
             <label for="Category" class="col-sm-2 control-label">Категория</label>
             <div class="col-md-10">
-               <!-- <select class="form-control" required name="selectedCategory">
-                     foreach(string element in Post.Category)
+            <select class="form-control" required name="selectedCategory">
+                     @foreach(var element in Post.Category)
                     {
-                        <option>element</option>
+                         <optgroup  label="@element.Name">@foreach (var item in element.Childrens)
+                         {
+                <option> @item.Name</option>
+                         }</optgroup>
+                      
                     }
                 </select>
-                   -->
-
-
-           
-
             </div>
 
         </div>
@@ -63,4 +62,3 @@
     </form>
     </div>
     <hr />
-    

@@ -46,7 +46,7 @@
                                 <p>
                                    @foreach (var tags in Model.CollectionTags)
                                    {
-                                    <a class="btn btn-default btn-sm" href="#">
+                                    <a class="btn btn-default btn-sm" href="@Url.Action("Tag","Home", new { tags = tags })">
                                         @tags
                                     </a>
                                    }

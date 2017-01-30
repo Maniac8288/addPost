@@ -21,8 +21,19 @@ namespace AddPost.Models
             new Category()
             {
                 Name="Новости",
-                Childrens= new List<Category> {new Category() {Name="Спорт" } }
+                Childrens= new List<Category> {new Category() {Name="Спорт" },new Category() {Name="Политика" } }
+            },
+            new Category()
+            {
+                Name="Кино",
+                Childrens=new List<Models.Category> {new Category() {Name="Драма" },new Category() {Name="Фантастика"}, new Category() { Name = "Ужасы" }, new Category() { Name = "Триллер" } }
+            },
+            new Category()
+            {
+                Name="Медицниа",
+                Childrens = new List<Models.Category> {new Category() { Name="Народная медицина"}, new Category() { Name = "Советы от врачей" } }
             }
+            
 
         };
   

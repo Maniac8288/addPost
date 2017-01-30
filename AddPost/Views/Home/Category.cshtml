@@ -46,9 +46,16 @@
                     </p>
                     <div class="help-block">
                         <p>
-
+                            @foreach (var tags in item.CollectionTags)
+                            {
+                                <a class="btn btn-default btn-sm" href="@Url.Action("Tag","Home", new { tags = tags })">
+                                    @tags
+                                </a>
+                            }
                         </p>
                     </div>
+
+
 
                 </div>
             </div>

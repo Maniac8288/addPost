@@ -11,6 +11,9 @@ namespace AddPost.Controllers
 {
     public class HomeController : Controller
     {
+        Post db = new Models.Post();
+  
+     
         /// <summary>
         /// Главная страница
         /// </summary>
