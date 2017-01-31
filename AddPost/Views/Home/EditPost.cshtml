@@ -19,9 +19,15 @@
             <label for="Category" class="col-sm-2 control-label">Категория</label>
             <div class="col-md-10">
                 <select class="form-control" name="selectedCategory">
-                    @foreach (string element in Post.Category)
+                    @foreach (var element in Post.Category)
                     {
-                        <option>@element</option>
+                        <optgroup label="@element.Name">
+                            @foreach (var item in element.Childrens)
+                        {
+                            <option> @item.Name</option>
+                        }
+                    </optgroup>
+
                     }
                 </select>
 
@@ -48,8 +54,29 @@
             <div class="col-xs-4">
                 <input type="file" class="form-control " name="upload" id="upload" />
             </div>
-            <input type="submit" class="btn btn-defaultt" name="save" />
+            <a class="addLink btn btn-default">Добавить новый файл</a>
+            <div align="center">
+                <br />
+                <input type="submit" class="btn btn-info  " name="save" />
+            </div>
         </div>
 </form>
 </div>
 
+@section scripts {
+    <script>
+
+
+        $(function () {
+            var i = 0;
+            $('.addLink').click(function () {
+                i++;
+                var html2Add = "<div class='addfile'>" +
+             "<h4>Файл №" + (i + 1) + "</h4>" +
+                     "<input type='file' class='form-control' name='upload' />" +
+                 "</div></div></div>";
+                $('.addbut').append(html2Add);
+            })
+        })
+    </script>
+}

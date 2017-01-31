@@ -52,13 +52,35 @@
                 </div> 
           
                 <label for="File" class="col-sm-2 control-label">Прикрепить файл</label>
-            <div class="col-xs-4">
+            <div class="addbut col-xs-4">
+   
                 <input type="file" class="form-control " name="upload" id="upload" />
+              
             </div>
-            <input type="submit" class="btn btn-defaultt  " name="save" />
+           <a class="addLink btn btn-default">Добавить новый файл</a>
+            <div align="center">
+                <br />
+                <input type="submit" class="btn btn-info  " name="save" />
+            </div>
             </div>
            
             
     </form>
     </div>
     <hr />
+@section scripts {
+    <script> 
+
+        $(function () {
+            var i = 0;
+            $('.addLink').click(function () {
+                i++;
+                var html2Add = "<div class='addfile'>" +
+             "<h4>Файл №" + (i + 1) + "</h4>" +
+                     "<input type='file' class='form-control' name='upload' />" +
+                 "</div></div></div>";
+                $('.addbut').append(html2Add);
+            })
+        })
+    </script>
+    }

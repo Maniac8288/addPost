@@ -55,7 +55,7 @@ namespace AddPost.Models
         /// <summary>
         /// Название картинки
         /// </summary>
-        public string upload { get; set; }
+        public List<string> upload = new List <string>();
         public int PostID { get; set; }
     }
    

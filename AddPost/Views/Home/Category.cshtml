@@ -9,7 +9,7 @@
         <div class="col-md-12 panel panel-info">
             <div class="panel-heading col-md-12">
                 <h1 class="panel-title" align="center">
-                    @item.NamePost
+                    <a href="post/@item.PostID" title="Полная сататья"> @item.NamePost</a>
                 </h1>
             </div>
 
@@ -21,9 +21,9 @@
             </div>
             <br />
             <div align="center">
-                @if (item.upload != null)
+                @if (item.upload.Count != 0)
                 {
-                    <img src="~/img/@item.PostID/@item.upload" alt="@item.NamePost" title="@item.NamePost" width="65%" class="img-thumbnail">}
+                    <img src="~/img/@item.PostID/@item.upload[0]" alt="@item.NamePost" title="@item.NamePost" width="65%" class="img-thumbnail">}
             </div>
             <br />
             <div class="contentPostReady">
@@ -38,7 +38,9 @@
                 </div>
 
             </div>
-
+            <p class="panel-body" align="center">
+                <a href="post/@item.PostID" title="Полная сататья"> Читать  далее</a>
+            </p>
             <div class="postFoter">
                 <div class="panel-footer" align="center">
                     <p>

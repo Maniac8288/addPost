@@ -39,21 +39,26 @@ namespace AddPost.Controllers
         /// <param name="upload">Добавление картинки</param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult AddPost(Post model, HttpPostedFileBase upload)
+        public ActionResult AddPost(Post model, IEnumerable<HttpPostedFileBase> upload)
         {
             PostDataStorage.Storage.AddPost(model);
-            if (upload != null)
+           
+            foreach (var file in upload)
             {
              
-                // получаем имя файла
-                string fileName = System.IO.Path.GetFileName(upload.FileName);
-                model.upload = fileName;
-                // сохраняем файл в папку img в проекте
-                System.IO.Directory.CreateDirectory(Server.MapPath("~/img/")+model.PostID);
-
-                upload.SaveAs(Server.MapPath("~/img/" + model.PostID + "/" + fileName));
+                if (file != null)
+                {
+                    // получаем имя файла
+                    string fileName = System.IO.Path.GetFileName(file.FileName);
+                    model.upload.Add(fileName);
+                    // сохраняем файл в папку img в проекте
+                    System.IO.Directory.CreateDirectory(Server.MapPath("~/img/") + model.PostID);
+                   file.SaveAs(Server.MapPath("~/img/" + model.PostID + "/" + fileName));
+                }
             }
-           
+
+          
+
             return RedirectToAction("Index");
         }
         /// <summary>
@@ -112,15 +117,22 @@ namespace AddPost.Controllers
         /// <returns>Возвращает на страницу пост</returns>
        ///[ValidateInput(false)]
         [HttpPost]
-        public ActionResult EditPost(int id, Post model, HttpPostedFileBase upload)
+        public ActionResult EditPost(int id, Post model, IEnumerable<HttpPostedFileBase> upload)
        {
-            if (upload != null)
+            
+            foreach (var file in upload)
             {
-                // получаем имя файла
-                string fileName = System.IO.Path.GetFileName(upload.FileName);
-                model.upload = fileName;
-                // сохраняем файл в папку img в проекте
-                upload.SaveAs(Server.MapPath("~/img/" + fileName));
+              
+                if (file != null)
+                {
+                    // получаем имя файла
+                    string fileName = System.IO.Path.GetFileName(file.FileName);
+                    model.upload.Add(fileName);
+                    // сохраняем файл в папку img в проекте
+                    System.IO.Directory.CreateDirectory(Server.MapPath("~/img/") + model.PostID);
+                    file.SaveAs(Server.MapPath("~/img/" + model.PostID + "/" + fileName));
+                }
+
             }
             PostDataStorage.Storage.EditPost(model);
             return View("Post", model);
