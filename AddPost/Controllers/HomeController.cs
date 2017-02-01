@@ -9,7 +9,7 @@ using PagedList;
 
 namespace AddPost.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         Post db = new Models.Post();
   
