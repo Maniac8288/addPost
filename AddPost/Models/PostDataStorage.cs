@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PostModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -74,7 +75,7 @@ namespace AddPost.Models
         /// </summary>
         /// <param name="PostID">Ид поста</param>
         /// <returns>возвращает int переменную равную ID поста</returns>
-        public Post GetPostById(int PostID)
+        public Post GetPostById(int? PostID)
         {
             return postList.Find(x => x.PostID == PostID);
         }

@@ -8,7 +8,7 @@ namespace AddPost
     {
         public void Configuration(IAppBuilder app)
         {
-            ConfigureAuth(app);
+           
         }
     }
 }

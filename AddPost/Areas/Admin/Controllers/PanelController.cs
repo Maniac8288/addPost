@@ -1,19 +1,21 @@
-﻿using AddPost.Models;
+﻿using AddPost.Controllers;
+using AddPost.Filters;
+using AddPost.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Net;
+using System.Net.Http;
 using System.Web.Mvc;
 
 namespace AddPost.Areas.Admin.Controllers
 {
-    public class PanelController : Controller
+    public class PanelController : BaseController
     {
-        [Authorize(Roles ="admin")]
-        public ActionResult EditPost(int id)
+        [CustomAuthAttribute]
+        public ActionResult ChooseEditPost()
         {
-
-            return View(PostDataStorage.Storage.GetPostById(id));
+            return View(PostDataStorage.Storage.GetAllPost().OrderByDescending(x => x.dateAddPost));
         }
     }
 }

@@ -12,8 +12,8 @@ namespace AddPost.Controllers
     public class HomeController : BaseController
     {
         Post db = new Models.Post();
-  
-     
+
+
         /// <summary>
         /// Главная страница
         /// </summary>
@@ -42,10 +42,10 @@ namespace AddPost.Controllers
         public ActionResult AddPost(Post model, IEnumerable<HttpPostedFileBase> upload)
         {
             PostDataStorage.Storage.AddPost(model);
-           
+
             foreach (var file in upload)
             {
-             
+
                 if (file != null)
                 {
                     // получаем имя файла
@@ -53,11 +53,11 @@ namespace AddPost.Controllers
                     model.upload.Add(fileName);
                     // сохраняем файл в папку img в проекте
                     System.IO.Directory.CreateDirectory(Server.MapPath("~/img/") + model.PostID);
-                   file.SaveAs(Server.MapPath("~/img/" + model.PostID + "/" + fileName));
+                    file.SaveAs(Server.MapPath("~/img/" + model.PostID + "/" + fileName));
                 }
             }
 
-          
+
 
             return RedirectToAction("Index");
         }
@@ -87,12 +87,12 @@ namespace AddPost.Controllers
         /// <returns>Возвращает на главную страницу</returns>
         public ActionResult deletePost(int id, Post model)
         {
-           
 
-            string fullPath = Request.MapPath("~/img/"+id);
+
+            string fullPath = Request.MapPath("~/img/" + id);
             if (System.IO.Directory.Exists(fullPath))
             {
-                System.IO.Directory.Delete(fullPath,true);
+                System.IO.Directory.Delete(fullPath, true);
             }
             PostDataStorage.Storage.DeletePost(id);
             return RedirectToAction("ChooseEditPost");
@@ -115,14 +115,14 @@ namespace AddPost.Controllers
         /// <param name="model"></param>
         /// <param name="upload"></param>
         /// <returns>Возвращает на страницу пост</returns>
-       ///[ValidateInput(false)]
+        ///[ValidateInput(false)]
         [HttpPost]
         public ActionResult EditPost(int id, Post model, IEnumerable<HttpPostedFileBase> upload)
-       {
-            
+        {
+
             foreach (var file in upload)
             {
-              
+
                 if (file != null)
                 {
                     // получаем имя файла
@@ -140,7 +140,7 @@ namespace AddPost.Controllers
         [HttpGet]
         public ActionResult Tag(string tags)
         {
-         
+
             return View(PostDataStorage.Storage.GetPostByTag(tags));
         }
         public ActionResult Category(string category)
