@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using AddPost.Models;
 using PagedList.Mvc;
 using PagedList;
+using AddPost.Infrastructura;
 
 namespace AddPost.Controllers
 {
@@ -74,7 +75,7 @@ namespace AddPost.Controllers
         /// Страница с выбором постов, которые нужно изменить
         /// </summary>
         /// <returns>Вывод всех постов</returns>
-
+        [FilterUser(Roles ="Admin")]
         public ActionResult ChooseEditPost()
         {
             return View(PostDataStorage.Storage.GetAllPost().OrderByDescending(x => x.dateAddPost));

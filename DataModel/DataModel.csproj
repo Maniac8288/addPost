@@ -54,6 +54,14 @@
     <Compile Include="Migrations\201702011906060_test3.Designer.cs">
       <DependentUpon>201702011906060_test3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702041833026_asdads.cs" />
+    <Compile Include="Migrations\201702041833026_asdads.Designer.cs">
+      <DependentUpon>201702041833026_asdads.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702041842554_lasd.cs" />
+    <Compile Include="Migrations\201702041842554_lasd.Designer.cs">
+      <DependentUpon>201702041842554_lasd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Role.cs" />
@@ -66,6 +74,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201702011906060_test3.resx">
       <DependentUpon>201702011906060_test3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702041833026_asdads.resx">
+      <DependentUpon>201702041833026_asdads.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702041842554_lasd.resx">
+      <DependentUpon>201702041842554_lasd.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

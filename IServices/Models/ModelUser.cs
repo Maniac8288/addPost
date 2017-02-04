@@ -13,6 +13,7 @@ namespace IServices.Models
         public string UserName { get; set; }
 
         public string Password { get; set; }
+        
         /// <summary>
         /// Авторизован пользователь или нет
         /// </summary>

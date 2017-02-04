@@ -26,7 +26,8 @@ namespace DataModel.Migrations
 
             context.Roles.AddOrUpdate(p => p.Id,
                 new Role { Id = TypeRoles.Admin, Name = "Admin", Users = new List<User> { admin } },
-                new Role { Id = TypeRoles.User, Name = "User", Users = new List<User> { user } }
+                new Role { Id = TypeRoles.User, Name = "User", Users = new List<User> { user } },
+                  new Role { Id = TypeRoles.Admin, Name = "Admin", Users = new List<User> { new User { UserName = "Rowan Miller", Password = "123456" } } }
                 );
         }
     }
