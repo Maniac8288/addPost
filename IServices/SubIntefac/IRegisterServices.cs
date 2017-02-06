@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace IServices.SubIntefac
+namespace IServices
 {
     public interface IRegisterServices
     {

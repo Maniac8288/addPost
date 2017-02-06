@@ -66,7 +66,7 @@ namespace AddPost.Infrastructura
         }
         public static void Register(string userName, string password)
         {
-
+            Services.Register.Register(userName,password);
         }
 
         #region Криптография

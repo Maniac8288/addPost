@@ -1,4 +1,4 @@
-﻿using IServices.SubIntefac;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +10,6 @@ namespace IServices
     public interface IMainServices
     {
         IUserServices Users { get; set; }
-      
+        IRegisterServices Register { get;set; }
     }
 }

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IServices;
-using IServices.SubIntefac;
 using DataModel;
 using Services.Models;
 
@@ -12,7 +11,7 @@ namespace Services
 {
     class RegisterServices : IRegisterServices
     {
-    public    void Register(string userName, string password)
+    public void Register(string userName, string password)
         {
             string HashPw = Security.instance.GetHashString(password);
             string salt = Security.instance.getSalt();
