@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IServices.SubIntefac;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace IServices
 {
     public interface IMainServices
     {
-        IUserServices Users { get; set; } 
+        IUserServices Users { get; set; }
+      
     }
 }

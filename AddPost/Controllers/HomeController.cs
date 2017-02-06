@@ -39,6 +39,7 @@ namespace AddPost.Controllers
         /// <param name="model">Модель поста</param>
         /// <param name="upload">Добавление картинки</param>
         /// <returns></returns>
+
         [HttpPost]
         public ActionResult AddPost(Post model, IEnumerable<HttpPostedFileBase> upload)
         {
@@ -57,9 +58,6 @@ namespace AddPost.Controllers
                     file.SaveAs(Server.MapPath("~/img/" + model.PostID + "/" + fileName));
                 }
             }
-
-
-
             return RedirectToAction("Index");
         }
         /// <summary>
@@ -88,8 +86,6 @@ namespace AddPost.Controllers
         /// <returns>Возвращает на главную страницу</returns>
         public ActionResult deletePost(int id, Post model)
         {
-
-
             string fullPath = Request.MapPath("~/img/" + id);
             if (System.IO.Directory.Exists(fullPath))
             {
@@ -116,11 +112,10 @@ namespace AddPost.Controllers
         /// <param name="model"></param>
         /// <param name="upload"></param>
         /// <returns>Возвращает на страницу пост</returns>
-        ///[ValidateInput(false)]
+        [FilterUser(Roles = "Admin")]
         [HttpPost]
         public ActionResult EditPost(int id, Post model, IEnumerable<HttpPostedFileBase> upload)
         {
-
             foreach (var file in upload)
             {
 

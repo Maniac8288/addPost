@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AddPost.Models;
+using IServices.SubIntefac;
 
 namespace AddPost.Controllers
 {
@@ -24,37 +25,14 @@ namespace AddPost.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Login(string userName, string password)
+        public ActionResult Login(string userName, string password, string RememberMe)
         {
-            string pw3 = PostDataStorage.Storage.GetHashString(password);
-            WebUser.Login(userName, pw3);
-            ModelUser user = WebUser.CurrentUser;
-            if (user.IsAuth == true)
-            {
-                Session["user"] = user;
-
-                if (Request.Cookies["User"] == null)
-                {
-                    HttpCookie cookie = new HttpCookie("User");
-                    cookie["UserName"] = user.UserName;
-                    cookie["Password"] = pw3;
-                    cookie.Expires = DateTime.Now.AddDays(1);
-                    Response.Cookies.Add(cookie);
-                }
-            }
-        
-
+            WebUser.Login(userName, password, RememberMe);
             return RedirectToAction("index", "home");
         }
         public ActionResult LogOut()
         {
             WebUser.LogOff();
-            if (Request.Cookies["User"] != null)
-            {
-                HttpCookie myCookie = new HttpCookie("User");
-                myCookie.Expires = DateTime.Now.AddDays(-1d);
-                Response.Cookies.Add(myCookie);
-            }
             return RedirectToAction("index", "home");
 
         }
@@ -64,22 +42,9 @@ namespace AddPost.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Register(string userName, string pw1,string pw2) {
+        public ActionResult Register(string userName, string pw1) {
 
-           string pw3=  PostDataStorage.Storage.GetHashString(pw1);
-            string salt = PostDataStorage.Storage.getSalt();
-            using (var db = new DataContext())
-            {
-                User user = new User()
-                {
-                    UserName = userName,
-                    Password = salt + pw3,
-                    Salt = salt
-                    
-                };
-                db.Users.Add(user);
-                db.SaveChanges();
-            }
+            WebUser.Register(userName, pw1);
             return RedirectToAction("index", "home");
         }
     }
