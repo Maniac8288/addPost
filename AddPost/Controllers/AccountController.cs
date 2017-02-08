@@ -7,7 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using AddPost.Models;
+using Rework;
 
 namespace AddPost.Controllers
 {
@@ -26,7 +26,8 @@ namespace AddPost.Controllers
         [HttpPost]
         public ActionResult Login(string userName, string password, string RememberMe)
         {
-            WebUser.Login(userName, password, RememberMe);
+         
+            WebUser.Login(userName, password, RememberMe == "on");
             return RedirectToAction("index", "home");
         }
         public ActionResult LogOut()

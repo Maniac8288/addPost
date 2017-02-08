@@ -49,7 +49,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Category.cs" />
+    <Compile Include="Migrations\201702072234481_test322.cs" />
+    <Compile Include="Migrations\201702072234481_test322.Designer.cs">
+      <DependentUpon>201702072234481_test322.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702072347016_test311.cs" />
+    <Compile Include="Migrations\201702072347016_test311.Designer.cs">
+      <DependentUpon>201702072347016_test311.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Migrations\201702011850062_tmp.cs" />
     <Compile Include="Migrations\201702011850062_tmp.Designer.cs">
       <DependentUpon>201702011850062_tmp.cs</DependentUpon>
@@ -59,7 +67,8 @@
       <DependentUpon>201702011945018_test4.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Post.cs" />
+    <Compile Include="Models\Post.cs" />
+    <Compile Include="Models\PostDataStorage.cs" />
     <Compile Include="PostContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -73,6 +82,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702011945018_test4.resx">
       <DependentUpon>201702011945018_test4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702072234481_test322.resx">
+      <DependentUpon>201702072234481_test322.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702072347016_test311.resx">
+      <DependentUpon>201702072347016_test311.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

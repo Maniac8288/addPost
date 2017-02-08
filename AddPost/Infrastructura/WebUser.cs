@@ -10,7 +10,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Numerics;
 using System.Globalization;
-using AddPost.Models;
+using Rework;
 
 namespace AddPost.Infrastructura
 {
@@ -34,7 +34,7 @@ namespace AddPost.Infrastructura
                     {
                         var model = Decrypt(data.Value);
                         if (model != null)
-                            Login(model.UserName, model.Password, model.IsAuth.ToString());
+                            Login(model.UserName, model.Password);
                         else return new ModelUser();
                     }
                 }
@@ -46,13 +46,13 @@ namespace AddPost.Infrastructura
             }
         }
 
-        public static void Login(string userName, string password, string RememberMe)
+        public static void Login(string userName, string password, bool RememberMe = false)
         {
-            string HashPw = PostDataStorage.Storage.GetHashString(password);
-            if (Services.Users.Login(userName, HashPw))
+            string sha256 = password.ToSHA(Crypto.SHA_Type.SHA256);
+            if (Services.Users.Login(userName, sha256))
             {
                 CurrentUser = new ModelUser { UserName = userName, IsAuth = true, Password = password };
-                if (RememberMe == "on")
+                if (RememberMe)
                 {
                     HttpContext.Current.Response.Cookies.Add(new HttpCookie("data") { Value = Encrypt(CurrentUser), Expires = DateTime.Now.AddDays(1) });
                 }

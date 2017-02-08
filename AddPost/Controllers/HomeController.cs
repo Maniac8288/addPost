@@ -3,25 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using AddPost.Models;
 using PagedList.Mvc;
 using PagedList;
 using AddPost.Infrastructura;
+using PostModel;
+using System.Data.Entity;
+using PostModel.Models;
+using System.IO;
 
 namespace AddPost.Controllers
 {
     public class HomeController : BaseController
     {
-        Post db = new Models.Post();
+       
 
 
         /// <summary>
         /// Главная страница
         /// </summary>
         /// <returns>Вывод всех постов отсортированне по дате </returns>
-        public ActionResult Index()
+        public ActionResult Index(Post model)
         {
-            return View(PostDataStorage.Storage.GetAllPost().OrderByDescending(x => x.dateAddPost));
+       
+            return View(db.Posts.OrderByDescending(x => x.dateAddPost));
         }
         /// <summary>
         /// Страница добовления поста на сайт
@@ -41,23 +45,24 @@ namespace AddPost.Controllers
         /// <returns></returns>
 
         [HttpPost]
-        public ActionResult AddPost(Post model, IEnumerable<HttpPostedFileBase> upload)
+        public ActionResult AddPost(Post model, HttpPostedFileBase upload)
         {
-            PostDataStorage.Storage.AddPost(model);
+           
 
-            foreach (var file in upload)
-            {
-
-                if (file != null)
+                if (upload != null)
                 {
                     // получаем имя файла
-                    string fileName = System.IO.Path.GetFileName(file.FileName);
-                    model.upload.Add(fileName);
+                    string fileName = System.IO.Path.GetFileName(upload.FileName);
+                    model.upload = fileName;
                     // сохраняем файл в папку img в проекте
                     System.IO.Directory.CreateDirectory(Server.MapPath("~/img/") + model.PostID);
-                    file.SaveAs(Server.MapPath("~/img/" + model.PostID + "/" + fileName));
-                }
+                upload.SaveAs(Server.MapPath("~/img/" + model.PostID + "/" + fileName));
+               
+           
+             
             }
+            db.Posts.Add(model);
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
         /// <summary>
@@ -65,18 +70,23 @@ namespace AddPost.Controllers
         /// </summary>
         /// <param name="id">ид определенного поста</param>
         /// <returns>Вызывает метод определяющий ИД</returns>
-        public ActionResult Post(int id)
+        public ActionResult Post(int? id)
         {
-            return View(PostDataStorage.Storage.GetPostById(id));
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            PostDataStorage.collectionsTags = PostDataStorage.Storage.TagsSplit(db.Posts.Find(id));
+            return View(db.Posts.Find(id));
         }
         /// <summary>
         /// Страница с выбором постов, которые нужно изменить
         /// </summary>
         /// <returns>Вывод всех постов</returns>
-        [FilterUser(Roles ="Admin")]
+      //  [FilterUser(Roles ="Admin")]
         public ActionResult ChooseEditPost()
         {
-            return View(PostDataStorage.Storage.GetAllPost().OrderByDescending(x => x.dateAddPost));
+            return View(db.Posts.OrderByDescending(x => x.dateAddPost));
         }
         /// <summary>
         /// Метод удаление
@@ -84,14 +94,19 @@ namespace AddPost.Controllers
         /// <param name="id"></param>
         /// <param name="model"></param>
         /// <returns>Возвращает на главную страницу</returns>
-        public ActionResult deletePost(int id, Post model)
+        public ActionResult deletePost(int? id)
         {
+            if(db.Posts.Find(id) == null)
+            {
+                return HttpNotFound();
+            }
             string fullPath = Request.MapPath("~/img/" + id);
             if (System.IO.Directory.Exists(fullPath))
             {
                 System.IO.Directory.Delete(fullPath, true);
             }
-            PostDataStorage.Storage.DeletePost(id);
+            db.Posts.Remove(db.Posts.Find(id));
+            db.SaveChanges();
             return RedirectToAction("ChooseEditPost");
         }
         /// <summary>
@@ -99,11 +114,19 @@ namespace AddPost.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        //[FilterUser(Roles = "Admin")]
         [HttpGet]
-        public ActionResult EditPost(int id)
+        public ActionResult EditPost(int? id)
         {
-
-            return View(PostDataStorage.Storage.GetPostById(id));
+            if( id == null)
+            {
+                return HttpNotFound();
+            }
+            if (db.Posts.Find(id) != null)
+            {
+                return View(db.Posts.Find(id));
+            }
+             return HttpNotFound();
         }
         /// <summary>
         /// Метод редактирование поста
@@ -112,36 +135,49 @@ namespace AddPost.Controllers
         /// <param name="model"></param>
         /// <param name="upload"></param>
         /// <returns>Возвращает на страницу пост</returns>
-        [FilterUser(Roles = "Admin")]
+    
         [HttpPost]
-        public ActionResult EditPost(int id, Post model, IEnumerable<HttpPostedFileBase> upload)
+        public ActionResult EditPost(Post model, HttpPostedFileBase upload)
         {
-            foreach (var file in upload)
-            {
+            
 
-                if (file != null)
+                if (upload != null)
                 {
                     // получаем имя файла
-                    string fileName = System.IO.Path.GetFileName(file.FileName);
-                    model.upload.Add(fileName);
+                    string fileName = System.IO.Path.GetFileName(upload.FileName);
+                    model.upload = fileName;
                     // сохраняем файл в папку img в проекте
                     System.IO.Directory.CreateDirectory(Server.MapPath("~/img/") + model.PostID);
-                    file.SaveAs(Server.MapPath("~/img/" + model.PostID + "/" + fileName));
-                }
+                upload.SaveAs(Server.MapPath("~/img/" + model.PostID + "/" + fileName));
+             
+
 
             }
-            PostDataStorage.Storage.EditPost(model);
+            db.Entry(model).State = EntityState.Modified;
+            if (upload == null)
+            {
+                DirectoryInfo dir = new DirectoryInfo(Server.MapPath(("~/img/" + model.PostID + "/")));
+
+                foreach (var item in dir.GetFiles())
+                {
+                    model.upload = item.ToString();
+                }
+             
+            }
+            db.SaveChanges();
+            PostDataStorage.collectionsTags = PostDataStorage.Storage.TagsSplit(model);
+
             return View("Post", model);
         }
         [HttpGet]
         public ActionResult Tag(string tags)
         {
 
-            return View(PostDataStorage.Storage.GetPostByTag(tags));
+            return View(db.Posts.Where(x => x.Tags.Contains(tags)));
         }
         public ActionResult Category(string category)
         {
-            return View(PostDataStorage.Storage.GetPostByCategory(category));
+            return View(db.Posts.Where(x => x.selectedCategory == category));
         }
     }
 }

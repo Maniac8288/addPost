@@ -1,5 +1,5 @@
-﻿@model IEnumerable<AddPost.Models.Post>
-@using AddPost.Models;
+﻿@using PostModel.Models;
+@model IEnumerable<Post>
 @{
     ViewBag.Title = "Главная";
 }
@@ -36,9 +36,9 @@
                     </div>
 
                     <div align="center">
-                        @if (item.upload.Count !=0)
-                            {
-                            <img src="~/img/@item.PostID/@item.upload[0]" alt="@item.NamePost" title="@item.NamePost" width="65%" class="img-thumbnail">}
+                        
+                        
+                            <img src="~/img/@item.PostID/@item.upload" alt="@item.NamePost" title="@item.NamePost" width="65%" class="img-thumbnail">
                     </div>
                     <br />
                     <div class="contentPost">
@@ -62,8 +62,8 @@
                                 @item.dateAddPost
                             </p>
                             <div class="help-block">
-
-                                @foreach (string tag in item.CollectionTags)
+                              @{ PostDataStorage.collectionsTags = PostDataStorage.Storage.TagsSplit(item);}
+                                @foreach (string tag in PostDataStorage.collectionsTags)
                                 {
                                     <a class="btn btn-default btn-sm" href="@Url.Action("Tag","Home", new { tags = tag })">
                                         @tag

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace AddPost.Models
+namespace PostModel.Models
 {
     /// <summary>
     /// 
@@ -16,27 +16,8 @@ namespace AddPost.Models
         /// <summary>
         /// Коллекция постов
         /// </summary>
-        public static List<Category> Category = new List<Category>()
-        {
-            new Category()
-            {
-                Name="Новости",
-                Childrens= new List<Category> {new Category() {Name="Спорт" },new Category() {Name="Политика" } }
-            },
-            new Category()
-            {
-                Name="Кино",
-                Childrens=new List<Models.Category> {new Category() {Name="Драма" },new Category() {Name="Фантастика"}, new Category() { Name = "Ужасы" }, new Category() { Name = "Триллер" } }
-            },
-            new Category()
-            {
-                Name="Медицниа",
-                Childrens = new List<Models.Category> {new Category() { Name="Народная медицина"}, new Category() { Name = "Советы от врачей" } }
-            }
-            
+        public static List<Category> Categories { get; set; }
 
-        };
-  
         public string selectedCategory { get; set; }
         /// <summary>
         /// Содержимое поста
@@ -55,8 +36,9 @@ namespace AddPost.Models
         /// <summary>
         /// Название картинки
         /// </summary>
-        public List<string> upload = new List <string>();
+        public string upload { get; set; }
         public int PostID { get; set; }
+       
     }
    
 }

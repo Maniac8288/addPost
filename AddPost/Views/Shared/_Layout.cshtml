@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using PostModel.Models;
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -24,7 +25,7 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Категория<b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            @foreach (var item in AddPost.Models.Post.Category)
+                            @foreach (var item in PostDataStorage.Category)
                             {
                                 <li class="dropdown-submenu">
                                     <a> @item.Name</a>

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using IServices;
 using DataModel;
 using Services.Models;
+using Rework;
 
 namespace Services
 {
@@ -13,14 +14,14 @@ namespace Services
     {
     public void Register(string userName, string password)
         {
-            string HashPw = Security.instance.GetHashString(password);
+            string sha256 = password.ToSHA(Crypto.SHA_Type.SHA256);
             string salt = Security.instance.getSalt();
             using (var db = new DataContext())
             {
                 User user = new User()
             {
                    UserName = userName,
-                  Password = salt + HashPw,
+                  Password = salt+sha256,
                  Salt = salt
                      };
                          db.Users.Add(user);
